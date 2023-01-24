@@ -11,22 +11,25 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      /*appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.search,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(35.0),
+        child: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.search,
+              ),
             ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.account_circle_outlined,
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.account_circle_outlined,
+              ),
             ),
-          ),
-        ],
-      ),*/
+          ],
+        ),
+      ),
       body: ListView(
         children: [
           SingleChildScrollView(
