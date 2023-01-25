@@ -42,15 +42,15 @@ class BlogBoxWidget extends StatelessWidget {
               spreadRadius: 2,
               blurRadius: 2,
               offset: Offset(
-                2,
-                2,
+                5,
+                5,
               ),
             )
           ],
         ),
         child: Column(
           children: [
-            Image.asset(imagePath),
+            Image.asset(imagePath, width: 200.0, height: 200.0,),
             ListTile(
               title: Text(title),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
