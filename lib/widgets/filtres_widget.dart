@@ -24,7 +24,9 @@ class ButtonFiltre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: Color.fromRGBO(bgred, bgvert, bgbleu, 1),
         foregroundColor: Color.fromRGBO(fgred, fgvert, fgbleu, 1),

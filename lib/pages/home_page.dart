@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:place_du_marche/widgets/box_ferme_widget.dart';
+import 'package:place_du_marche/models/farm.dart';
+//import 'package:place_du_marche/widgets/box_ferme_widget.dart';
+import 'package:place_du_marche/widgets/carte_ferme_widget.dart';
 import 'package:place_du_marche/widgets/filtres_widget.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 const backgroundColor = Color.fromRGBO(125, 206, 160, 1);
 const navBarColor = Color.fromARGB(255, 85, 167, 120);
+// ignore: non_constant_identifier_names
+bool _isVisible = true;
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +45,8 @@ class HomePage extends StatelessWidget {
               tabBackgroundColor: Color.fromARGB(255, 111, 180, 141),
               tabs: [
                 GButton(
-                  icon: Icons.favorite_border,
-                  text: 'Carnet d\'adresse',
+                  icon: Icons.map_outlined,
+                  text: 'Carte',
                 ),
                 GButton(
                   icon: Icons.home,
@@ -71,7 +81,7 @@ class HomePage extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
                 ),
-                labelText: 'Recherche',
+                labelText: 'Recherche...',
                 prefixIcon: Icon(Icons.search),
                 filled: true,
                 fillColor: Colors.white,
@@ -85,8 +95,14 @@ class HomePage extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
               child: Wrap(
                 spacing: 10,
-                children: const [
-                  ButtonFiltre(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      changeVisibility();
+                    },
+                    child: const Text("Carte"),
+                  ),
+                  const ButtonFiltre(
                       title: 'Viandes',
                       bgred: 236,
                       bgvert: 112,
@@ -94,7 +110,7 @@ class HomePage extends StatelessWidget {
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  ButtonFiltre(
+                  const ButtonFiltre(
                       title: 'Crémerie',
                       bgred: 236,
                       bgvert: 240,
@@ -102,7 +118,7 @@ class HomePage extends StatelessWidget {
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  ButtonFiltre(
+                  const ButtonFiltre(
                       title: 'Poissons',
                       bgred: 57,
                       bgvert: 202,
@@ -110,7 +126,7 @@ class HomePage extends StatelessWidget {
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  ButtonFiltre(
+                  const ButtonFiltre(
                       title: 'Vins et spiritieux',
                       bgred: 52,
                       bgvert: 181,
@@ -118,7 +134,7 @@ class HomePage extends StatelessWidget {
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  ButtonFiltre(
+                  const ButtonFiltre(
                       title: 'Oeufs',
                       bgred: 231,
                       bgvert: 194,
@@ -138,8 +154,38 @@ class HomePage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
                 child: Wrap(
                   spacing: 10,
-                  children: const [
-                    BlogBoxWidget(
+                  children: [
+                    Visibility(
+                      visible: _isVisible,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 15),
+                        color: Colors.red,
+                        height: 250.0,
+                        //child: Image.asset('/Users/collinssoares/Documents/Master1_22_23/Projet/flutter_projects/place_du_marche/images/map.png'),
+                      ),
+                    ),
+                    ProductCard(
+                      farm: farms[0],
+                      title: farms[0].title,
+                      imagePath: farms[0].image,
+                    ),
+                    ProductCard(
+                      farm: farms[1],
+                      title: farms[1].title,
+                      imagePath: farms[1].image,
+                    ),
+                    ProductCard(
+                      farm: farms[2],
+                      title: farms[2].title,
+                      imagePath: farms[2].image,
+                    ),
+                    ProductCard(
+                      farm: farms[3],
+                      title: farms[3].title,
+                      imagePath: farms[3].image,
+                    ),
+                    /* BlogBoxWidget(
                         title: 'La ferme de Viandes',
                         imagePath: 'images/test_ferme.png'),
                     BlogBoxWidget(
@@ -155,7 +201,7 @@ class HomePage extends StatelessWidget {
                         title: 'Viandes', imagePath: 'images/test_ferme.png'),
                     BlogBoxWidget(
                         title: 'Ferme de Collins',
-                        imagePath: 'images/test_ferme.png'),
+                        imagePath: 'images/test_ferme.png'), */
                   ],
                 ),
               ),
@@ -165,4 +211,11 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+  void changeVisibility() {
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
 }
+
+
