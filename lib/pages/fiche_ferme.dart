@@ -1,50 +1,37 @@
 import 'package:flutter/material.dart';
 
 String desc = 'La ferme de Collins est un héritage familiale depuis 1576.';
+const backgroundColor = Color.fromRGBO(125, 206, 160, 1);
 
 class FicheFerme extends StatelessWidget {
   const FicheFerme({
     super.key,
     required this.title,
     required this.imagePath,
+    required this.description,
   });
 
   final String title;
   final String imagePath;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Image.asset(imagePath),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                desc,
-                style: const TextStyle(
-                  fontSize: 18,
-                ),
-                textAlign: TextAlign.justify,
-              ),
-            ],
+        child: Stack(children: [
+          Container(
+            height: 250.0,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              //borderRadius: BorderRadius.circular(22),
+              image: DecorationImage(
+                  fit: BoxFit.cover, image: AssetImage("images/ferme2.png")),
+              //color: Colors.grey.shade500,
+            ),
           ),
-        ),
+        ]),
       ),
     );
   }
