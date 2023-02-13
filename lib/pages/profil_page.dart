@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-<<<<<<< HEAD
-class Profil extends StatelessWidget {
-  const Profil({super.key});
-=======
 class FavorisPage extends StatelessWidget {
   const FavorisPage({super.key});
->>>>>>> origin/main
 
   @override
   Widget build(BuildContext context) {
@@ -81,22 +76,14 @@ class FavorisPage extends StatelessWidget {
                       const Text(
                         'EMAIL : Cormier.Audrey@mail.com ',
                         style: TextStyle(
-<<<<<<< HEAD
-                          fontSize: 10.0,
-=======
                           fontSize: 15.0,
->>>>>>> origin/main
                           fontWeight: FontWeight.bold,
                         ),
                         //overflow: TextOverflow.fade,
                         //maxLines: 2,
                       ),
                       const SizedBox(
-<<<<<<< HEAD
-                        height: 10.0,
-=======
                         height: 20.0,
->>>>>>> origin/main
                       ),
                       RichText(
                         text: TextSpan(
@@ -158,11 +145,7 @@ class FavorisPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20.0,),
-<<<<<<< HEAD
-
-=======
                         
->>>>>>> origin/main
                         Container(
                           width: double.infinity,
                           height: 150,
