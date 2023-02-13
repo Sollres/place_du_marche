@@ -20,13 +20,13 @@ List<Farm> farms = [
   ),
   Farm(
     id: 1,
-    title: 'La ferme de momo',
+    title: 'La ferme de merde', 
     description: "Depuis 1976", 
     image:"images/ferme2.png",
   ),
   Farm(
     id: 1,
-    title: 'La ferme de fatih',
+    title: 'La ferme magique', 
     description: "Depuis 1986", 
     image:"images/milk.png",
   ),
