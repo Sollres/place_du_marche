@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:place_du_marche/models/farm.dart';
+import 'package:place_du_marche/pages/newHome.dart';
+import 'package:place_du_marche/pages/profil_page.dart';
 //import 'package:place_du_marche/widgets/box_ferme_widget.dart';
 import 'package:place_du_marche/widgets/carte_ferme_widget.dart';
 import 'package:place_du_marche/widgets/filtres_widget.dart';
@@ -17,8 +19,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => HomePageState();
 }
 
-class HomePageState extends State<HomePage>{
-
+class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,44 +34,55 @@ class HomePageState extends State<HomePage>{
             )
           ],
         ),
-        child: const SafeArea(
+        child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
             child: GNav(
               backgroundColor: navBarColor,
               tabBorderRadius: 100.0,
               hoverColor: Colors.grey,
               haptic: true,
               gap: 8,
-              tabBackgroundColor: Color.fromARGB(255, 111, 180, 141),
+              tabBackgroundColor: const Color.fromARGB(255, 111, 180, 141),
               tabs: [
                 GButton(
                   icon: Icons.map_outlined,
                   text: 'Carte',
+                  onPressed: () {
+                    changeVisibility();
+                  },
                 ),
                 GButton(
                   icon: Icons.home,
                   text: 'Accueil',
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const NewHome();
+                        },
+                      ),
+                    );
+                  },
                 ),
-                GButton(icon: Icons.account_circle_outlined, text: 'Profil'),
+                GButton(
+                  icon: Icons.account_circle_outlined,
+                  text: 'Profil',
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const FavorisPage();
+                        },
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
         ),
       ),
-      /*appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(35.0),
-        child: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.account_circle_outlined,
-              ),
-            ),
-          ],
-        ),
-      ),*/
       body: ListView(
         children: [
           const SizedBox(height: 20.0),
@@ -95,14 +107,8 @@ class HomePageState extends State<HomePage>{
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
               child: Wrap(
                 spacing: 10,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      changeVisibility();
-                    },
-                    child: const Text("Carte"),
-                  ),
-                  const ButtonFiltre(
+                children: const [
+                  ButtonFiltre(
                       title: 'Viandes',
                       bgred: 236,
                       bgvert: 112,
@@ -110,7 +116,7 @@ class HomePageState extends State<HomePage>{
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  const ButtonFiltre(
+                  ButtonFiltre(
                       title: 'Crémerie',
                       bgred: 236,
                       bgvert: 240,
@@ -118,7 +124,7 @@ class HomePageState extends State<HomePage>{
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  const ButtonFiltre(
+                  ButtonFiltre(
                       title: 'Poissons',
                       bgred: 57,
                       bgvert: 202,
@@ -126,7 +132,7 @@ class HomePageState extends State<HomePage>{
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  const ButtonFiltre(
+                  ButtonFiltre(
                       title: 'Vins et spiritieux',
                       bgred: 52,
                       bgvert: 181,
@@ -134,7 +140,7 @@ class HomePageState extends State<HomePage>{
                       fgred: 0,
                       fgvert: 0,
                       fgbleu: 0),
-                  const ButtonFiltre(
+                  ButtonFiltre(
                       title: 'Oeufs',
                       bgred: 231,
                       bgvert: 194,
@@ -185,23 +191,6 @@ class HomePageState extends State<HomePage>{
                       title: farms[3].title,
                       imagePath: farms[3].image,
                     ),
-                    /* BlogBoxWidget(
-                        title: 'La ferme de Viandes',
-                        imagePath: 'images/test_ferme.png'),
-                    BlogBoxWidget(
-                        title: 'La ferme de la Crémerie',
-                        imagePath: 'images/test_ferme.png'),
-                    BlogBoxWidget(
-                        title: 'La Ferme de George',
-                        imagePath: 'images/test_ferme.png'),
-                    BlogBoxWidget(
-                        title: 'La Ferme qui ferme',
-                        imagePath: 'images/test_ferme.png'),
-                    BlogBoxWidget(
-                        title: 'Viandes', imagePath: 'images/test_ferme.png'),
-                    BlogBoxWidget(
-                        title: 'Ferme de Collins',
-                        imagePath: 'images/test_ferme.png'), */
                   ],
                 ),
               ),
@@ -211,11 +200,10 @@ class HomePageState extends State<HomePage>{
       ),
     );
   }
+
   void changeVisibility() {
     setState(() {
       _isVisible = !_isVisible;
     });
   }
 }
-
-
