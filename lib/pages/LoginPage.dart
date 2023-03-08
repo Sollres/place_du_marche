@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'SignupPage.dart';
 import 'Connexion.dart';
+import 'package:http/http.dart' as http;
 
 
 class LoginPage extends StatelessWidget {
