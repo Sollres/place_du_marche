@@ -78,7 +78,7 @@ class HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const FavorisPage();
+                          return const Profil();
                         },
                       ),
                     );
