@@ -4,6 +4,7 @@ import 'package:place_du_marche/pages/newHome.dart';
 import 'package:place_du_marche/pages/profil_page.dart';
 //import 'package:place_du_marche/widgets/box_ferme_widget.dart';
 import 'package:place_du_marche/widgets/carte_ferme_widget.dart';
+import 'package:place_du_marche/widgets/etiquette_ferme_widget.dart';
 import 'package:place_du_marche/widgets/filtres_widget.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -13,7 +14,12 @@ const navBarColor = Color.fromARGB(255, 85, 167, 120);
 bool _isVisible = true;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    super.key,
+    this.id,
+    });
+
+  final int? id;
 
   @override
   State<HomePage> createState() => HomePageState();
@@ -84,6 +90,8 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       body: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         children: [
           const SizedBox(height: 20.0),
           const Padding(
