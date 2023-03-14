@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../pages/LoginPage.dart';
-import '../pages/ChatScreen.dart';
 
 void main() {
   runApp(const MyApp());
