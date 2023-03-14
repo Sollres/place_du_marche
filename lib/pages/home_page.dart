@@ -12,7 +12,7 @@ const backgroundColor = Color.fromRGBO(125, 206, 160, 1);
 const navBarColor = Color.fromARGB(255, 85, 167, 120);
 // ignore: non_constant_identifier_names
 bool _isVisible = true;
-
+bool _isOnline = true;
 class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
@@ -53,14 +53,14 @@ class HomePageState extends State<HomePage> {
               tabs: [
                 GButton(
                   icon: Icons.map_outlined,
-                  text: 'Carte',
+                  //text: 'Carte',
                   onPressed: () {
                     changeVisibility();
                   },
                 ),
                 GButton(
                   icon: Icons.home,
-                  text: 'Accueil',
+                  //text: 'Accueil',
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -73,12 +73,25 @@ class HomePageState extends State<HomePage> {
                 ),
                 GButton(
                   icon: Icons.account_circle_outlined,
-                  text: 'Profil',
+                  //text: 'Profil',
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
                           return const Profil();
+                        },
+                      ),
+                    );
+                  },
+                ),
+                GButton(
+                  icon: Icons.question_answer,
+                  //text: 'Tchat',
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const NewHome(); //Mettre la page de chat ici
                         },
                       ),
                     );
@@ -199,6 +212,8 @@ class HomePageState extends State<HomePage> {
                       title: farms[3].title,
                       imagePath: farms[3].image,
                     ),
+                    const Etiquette(),
+                    const Etiquette(),
                   ],
                 ),
               ),
@@ -212,6 +227,12 @@ class HomePageState extends State<HomePage> {
   void changeVisibility() {
     setState(() {
       _isVisible = !_isVisible;
+    });
+  }
+
+  void changeStatus(){
+    setState((){
+      _isOnline = !_isOnline;
     });
   }
 }
