@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'home_page.dart';
 
@@ -39,54 +40,46 @@ class _ConnexionState extends State<Connexion> {
     }
 
   Future login() async {
-    //print("first print");
     var url = Uri.parse('http://10.0.2.2:80/login.php');
-    //print("print url ");
-    //print(url);
 
     var response = await http.post(url, body: {
       "email": mail.text.toString(),
       "password": pass.text.toString(),
     });
-    print("début response cnx ++++++++++++++++++++");
-    print(response.body);
-    print("fin response cnx ++++++++++++++++++++");
+    print("++++++++++response.body ++++++++++++");
+    print(response.body );
 
-    print("avant data cnx :::::::::::::::::");
+    if (response.body != "\"Error: Invalid email or password\"") {
+      var jsonData = json.decode(response.body);
+      //print("+++++++jsonData++++++++");
+      //print(jsonData);
+      //print("++++++++++FinJD+++++++++++");
+      //print("+++++++++++++++jsonData['status']+++++++++++++++++");
+      //print(jsonData['id'].runtimeType);
 
-    //var data = json.decode(response.body);
-    //print("data :::::::::::::::::");
-    //print(data);
-    //print("fin data :::::::::::::::::");
+      if (jsonData != null) {
+        // Connexion réussie, récupérez l'id de l'utilisateur
 
-    if (response.body == "\"Error\""){
-      /*print("je suis dans le if");
-      Fluttertoast.showToast(
-        backgroundColor: Colors.orange,
-        textColor: Colors.white,
-        msg: 'User already exit!',
-        toastLength: Toast.LENGTH_SHORT,
-      );*/
-      _showDialog("Il y a une erreur dans le mail ou le mot de passe");
+        int? userId = int.tryParse(jsonData['id']);
+        //print("++++++++++++++ userId++++++++++++++");
+        //print('Utilisateur connecté avec l\'id $userId');
+        Fluttertoast.showToast(
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          msg: 'Vous êtes connecté avec l\'id $userId',
+          toastLength: Toast.LENGTH_SHORT,
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      } else {
+        // Connexion échouée
+        _showDialog("Il y a une erreur dans le mail ou le mot de passe");
+      }
     } else {
-      print("je suis dans le else");
-
-       Fluttertoast.showToast(
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        msg: 'Vous êtes connecté',
-        toastLength: Toast.LENGTH_SHORT,
-      );
-      //LoginPage();
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-      /*Navigator.push(context,
-        MaterialPageRoute(
-          builder: (context) => LoginPage(),
-        ),
-      );*/
+      // Erreur de requête
+      print('Erreur de requête : ${response.statusCode}');
     }
   }
 
