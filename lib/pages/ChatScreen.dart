@@ -17,17 +17,13 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final _messageController = TextEditingController();
-  final _userController = TextEditingController();
+  //final _userController = TextEditingController();
   final _recipientController = TextEditingController();
   final List<Map<String, dynamic>> _messages = [];
   Future<void> _getMessages() async {
     final response = await http.get(Uri.parse('http://10.0.2.2:80/chat.php'));
 
-    print("++++++++++++++++++response _getMessages()  ++++++++++++++++");
-    print(response.body);
     final List<dynamic> responseData = json.decode(response.body);
-    print("++++++++++++++++++responseDATA _getMessages()  ++++++++++++++++");
-    print(responseData);
 
     setState(() {
       _messages.clear();
@@ -35,25 +31,27 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  Future<void> _sendMessage() async {
-    final user = _userController.text;
+  Future<void> _sendMessage(int? id) async {
+    final int? user = id;
     final message = _messageController.text;
     final recipient = _recipientController.text;
     final response = await http.post(
       Uri.parse('http://10.0.2.2:80/chat.php'),
       body: {
-        'user': user,
+        'user' : user.toString(),
         'message': message,
         'recipient': recipient,
       },
     );
-    print("=============================widget.userid===============================");
-    print(widget.userid);
-    print("++++++++++++++++++response _SendMessages()  ++++++++++++++++");
-    print(response.body);
+    print("++++++++++++++++++++++id++++++++++++++++++++++++++");
+    print(user);
+    print(user.toString());
 
+    print("++++++++++++++++++++++reponses++++++++++++++++++++++++++");
+    print(response.body);
     _getMessages();
-    print("++++++++++++++++++response getMessages()  ++++++++++++++++");
+
+    print("++++++++++++++++++++++get++++++++++++++++++++++++++");
     print(_getMessages());
     _messageController.clear();
   }
@@ -68,8 +66,8 @@ class _ChatScreenState extends State<ChatScreen> {
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
-              bottomLeft: isMe ? Radius.circular(0) : Radius.circular(12),
-              bottomRight: isMe ? Radius.circular(12) : Radius.circular(0),
+              bottomRight: isMe ? Radius.circular(0) : Radius.circular(12),
+              bottomLeft: isMe ? Radius.circular(12) : Radius.circular(0),
             ),
           ),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -82,13 +80,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 style: TextStyle(
                   color: isMe ? Colors.white : Colors.black,
                   fontSize: 16,
-                ),
-              ),
-              Text(
-                message['user'],
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 12,
                 ),
               ),
             ],
@@ -114,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 final message = _messages[index];
-                final isMe = message['user'] == 'Me';
+                final isMe = message['user'] == widget.userid.toString();
                 return _buildMessageBubble(message, isMe);
               },
             ),
@@ -131,14 +122,14 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
-                Expanded(
+                /*Expanded(
                   child: TextField(
                     controller: _userController,
                     decoration: InputDecoration(
                       hintText: 'Username',
                     ),
                   ),
-                ),
+                ),*/
                 Expanded(
                   child: TextField(
                     controller: _recipientController,
@@ -149,7 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: _sendMessage,
+                  onPressed: () => _sendMessage(widget.userid),
                 ),
               ],
             ),

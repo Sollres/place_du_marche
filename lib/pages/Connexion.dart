@@ -73,12 +73,13 @@ class _ConnexionState extends State<Connexion> {
           context,
           MaterialPageRoute(builder: (context) => HomePage(id: userId)),
         );
-      } else {
-        // Connexion échouée
-        _showDialog("Il y a une erreur dans le mail ou le mot de passe");
       }
     } else {
       // Erreur de requête
+
+      // Connexion échouée
+      print("je suis dans le else +++ erreur mdp ou mal +++");
+      _showDialog("Il y a une erreur dans le mail ou le mot de passe");
       print('Erreur de requête : ${response.statusCode}');
     }
   }
