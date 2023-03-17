@@ -1,8 +1,16 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({
+    Key? key,
+    required this.userid,
+  }) : super(key: key);
+
+  final int? userid;
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -39,7 +47,8 @@ class _ChatScreenState extends State<ChatScreen> {
         'recipient': recipient,
       },
     );
-
+    print("=============================widget.userid===============================");
+    print(widget.userid);
     print("++++++++++++++++++response _SendMessages()  ++++++++++++++++");
     print(response.body);
 
@@ -94,9 +103,12 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: Text('Chat'),
       ),
+
       body: Column(
+
         children: [
           Expanded(
+
             child: ListView.builder(
               reverse: true,
               itemCount: _messages.length,
