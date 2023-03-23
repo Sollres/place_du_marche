@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:place_du_marche/pages/fiche_ferme.dart';
 
 String desc = 'La ferme de Collins est un héritage familiale depuis 1576.';
+String prod = "Fraise";
 
 class BlogBoxWidget extends StatelessWidget {
   const BlogBoxWidget({
@@ -23,7 +24,8 @@ class BlogBoxWidget extends StatelessWidget {
               return FicheFerme(
                 title: title,
                 imagePath: imagePath,
-                description: desc,
+                producteur: desc,
+                produits: prod,
               );
             },
           ),

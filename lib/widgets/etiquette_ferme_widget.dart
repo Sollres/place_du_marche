@@ -1,65 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:place_du_marche/pages/fiche_ferme.dart';
 
-import '../pages/profil_page.dart';
+import '../models/farm.dart';
 
 class Etiquette extends StatelessWidget {
-  const Etiquette({super.key});
+  const Etiquette({
+    super.key,
+    required this.farm,
+  });
+
+  final Farm farm;
+
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return const Profil();
-                    },
-                  ),
-                );
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return FicheFerme(title: farm.title, imagePath: farm.image, producteur: farm.producteur,produits: farm.produits,);
               },
+            ),
+          );
+        },
+        child: AspectRatio(
+              aspectRatio: 1.65,
               child: Container(
-                width: double.infinity,
-                height: size.height * 0.35,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 66, 170, 116),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15.0),
-                  ),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 66, 170, 116),
+                  borderRadius: BorderRadius.circular(18),
                 ),
-                child: Column(
-                  children: const [
-                    SizedBox(
+                child: Row(
+                  children: [
+                    Expanded(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 10.0),
-                        child: Text(
-                          'Les Petites Pousses ',
-                          //maxLines: 20,
-                          softWrap: true,
-                          textAlign: TextAlign.center,
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              farm.title,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              farm.categorie,
+                              maxLines: 2,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              farm.producteur,
+                              maxLines: 2,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              farm.produits,
+                              maxLines: 5,
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 10.0),
-                        child: Text(
-                          'Producteur(s) : Juliette Carrères\n\nContact : ferme.lespetitespousses@gmail.com\n\nProduits : Légumes de saison et dérivés, aromates, fleurs comestibles\n\nadresse : Lieu-dit Les Marais (au bout) 72170 Assé-le-Riboul\n\nMail : ferme.lespetitespousses@gmail.com',
-                          //maxLines: 20,
-                          softWrap: true,
+                    const SizedBox(width: 5),
+                    AspectRatio(
+                      aspectRatio: 0.71,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          farm.image,
+                          fit: BoxFit.cover,
+                          alignment: Alignment.centerLeft,
                         ),
                       ),
                     ),
-                    Positioned(right: 0, child: Text('Open!'))
                   ],
                 ),
               ),
             ),
-          );
+      ),
+    );
   }
 }
