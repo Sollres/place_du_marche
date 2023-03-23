@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:place_du_marche/models/farm.dart';
 import 'package:place_du_marche/pages/LoginPage.dart';
@@ -96,11 +98,7 @@ class HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          if(_isConnected == true) {
-                            return ChatScreen();
-                          }else{
-                            return LoginPage();
-                          } //Mettre la page de chat ici
+                          return ChatScreen(userid: widget.id); //Mettre la page de chat ici
                         },
                       ),
                     );

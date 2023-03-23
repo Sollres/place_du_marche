@@ -63,22 +63,23 @@ class _ConnexionState extends State<Connexion> {
         int? userId = int.tryParse(jsonData['id']);
         //print("++++++++++++++ userId++++++++++++++");
         //print('Utilisateur connecté avec l\'id $userId');
-        Fluttertoast.showToast(
+        /*Fluttertoast.showToast(
           backgroundColor: Colors.green,
           textColor: Colors.white,
           msg: 'Vous êtes connecté avec l\'id $userId',
           toastLength: Toast.LENGTH_SHORT,
-        );
+        );*/
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => HomePage(id: userId)),
         );
-      } else {
-        // Connexion échouée
-        _showDialog("Il y a une erreur dans le mail ou le mot de passe");
       }
     } else {
       // Erreur de requête
+
+      // Connexion échouée
+      print("je suis dans le else +++ erreur mdp ou mal +++");
+      _showDialog("Il y a une erreur dans le mail ou le mot de passe");
       print('Erreur de requête : ${response.statusCode}');
     }
   }
