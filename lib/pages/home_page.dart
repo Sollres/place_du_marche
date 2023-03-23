@@ -1,19 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:place_du_marche/models/farm.dart';
-import 'package:place_du_marche/pages/newHome.dart';
+import 'package:place_du_marche/pages/LoginPage.dart';
+//import 'package:place_du_marche/pages/newHome.dart';
 import 'package:place_du_marche/pages/profil_page.dart';
 //import 'package:place_du_marche/widgets/box_ferme_widget.dart';
-import 'package:place_du_marche/widgets/carte_ferme_widget.dart';
+//import 'package:place_du_marche/widgets/carte_ferme_widget.dart';
+import 'package:place_du_marche/widgets/etiquette_ferme_widget.dart';
 import 'package:place_du_marche/widgets/filtres_widget.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
+import 'ChatScreen.dart';
 
 const backgroundColor = Color.fromRGBO(125, 206, 160, 1);
 const navBarColor = Color.fromARGB(255, 85, 167, 120);
 // ignore: non_constant_identifier_names
 bool _isVisible = true;
+bool _isOnline = true;
+bool _isConnected = false;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    super.key,
+    this.id,
+  });
+
+  final int? id;
 
   @override
   State<HomePage> createState() => HomePageState();
@@ -47,19 +60,19 @@ class HomePageState extends State<HomePage> {
               tabs: [
                 GButton(
                   icon: Icons.map_outlined,
-                  text: 'Carte',
+                  //text: 'Carte',
                   onPressed: () {
                     changeVisibility();
                   },
                 ),
                 GButton(
                   icon: Icons.home,
-                  text: 'Accueil',
+                  //text: 'Accueil',
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const NewHome();
+                          return const HomePage();
                         },
                       ),
                     );
@@ -67,12 +80,25 @@ class HomePageState extends State<HomePage> {
                 ),
                 GButton(
                   icon: Icons.account_circle_outlined,
-                  text: 'Profil',
+                  //text: 'Profil',
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const Profil();
+                          return const ProfilPage(email: 'Petit',nom: 'Guy',prenom: 'Jean');
+                        },
+                      ),
+                    );
+                  },
+                ),
+                GButton(
+                  icon: Icons.question_answer,
+                  //text: 'Tchat',
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return ChatScreen(userid: widget.id,recid: 2); //Mettre la page de chat ici
                         },
                       ),
                     );
@@ -84,6 +110,8 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       body: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         children: [
           const SizedBox(height: 20.0),
           const Padding(
@@ -152,48 +180,24 @@ class HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                child: Wrap(
-                  spacing: 10,
-                  children: [
-                    Visibility(
-                      visible: _isVisible,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 15),
-                        color: Colors.red,
-                        height: 250.0,
-                        //child: Image.asset('/Users/collinssoares/Documents/Master1_22_23/Projet/flutter_projects/place_du_marche/images/map.png'),
-                      ),
-                    ),
-                    ProductCard(
-                      farm: farms[0],
-                      title: farms[0].title,
-                      imagePath: farms[0].image,
-                    ),
-                    ProductCard(
-                      farm: farms[1],
-                      title: farms[1].title,
-                      imagePath: farms[1].image,
-                    ),
-                    ProductCard(
-                      farm: farms[2],
-                      title: farms[2].title,
-                      imagePath: farms[2].image,
-                    ),
-                    ProductCard(
-                      farm: farms[3],
-                      title: farms[3].title,
-                      imagePath: farms[3].image,
-                    ),
-                  ],
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Visibility(
+                  visible: _isVisible,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    color: Colors.red,
+                    height: 250.0,
+                  ),
                 ),
-              ),
+                Etiquette(farm: farms[0]),
+                Etiquette(farm: farms[1]),
+                Etiquette(farm: farms[2]),
+                Etiquette(farm: farms[3]),
+              ],
             ),
           ),
         ],
@@ -204,6 +208,12 @@ class HomePageState extends State<HomePage> {
   void changeVisibility() {
     setState(() {
       _isVisible = !_isVisible;
+    });
+  }
+
+  void changeStatus() {
+    setState(() {
+      _isOnline = !_isOnline;
     });
   }
 }

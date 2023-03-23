@@ -45,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Future register() async {
     //print("first print");
-    var url = Uri.parse('http://10.0.2.2:80/register.php');
+    var url = Uri.parse('http://10.0.2.2:8888/register.php');
     //print("print url ");
     //print(url);
 

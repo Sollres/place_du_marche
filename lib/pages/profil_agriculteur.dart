@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:test/ajouter_produit.dart';
-import 'main.dart';
+import '../main.dart';
+import 'ajouter_produit.dart';
 
 class PageProfilAgri extends StatelessWidget {
   const PageProfilAgri({
@@ -90,7 +90,7 @@ class PageProfilAgri extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return const Profil(); //appeler le login page ou le menu principale.
+                        return const MyApp(); //appeler le login page ou le menu principale.
                       },
                     ),
                   );

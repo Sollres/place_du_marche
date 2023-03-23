@@ -40,16 +40,21 @@ class _ConnexionState extends State<Connexion> {
     }
 
   Future login() async {
-    var url = Uri.parse('http://10.0.2.2:80/login.php');
-
+    var url = Uri.parse('http://10.0.2.2:8888/login.php'); //'http://10.0.2.2:80/login.php'
+    print("url---------------");
+    print(url);
     var response = await http.post(url, body: {
       "email": mail.text.toString(),
       "password": pass.text.toString(),
     });
     print("++++++++++response.body ++++++++++++");
     print(response.body );
+    print("++++++++++FIN---response.body ++++++++++++");
+
 
     if (response.body != "\"Error: Invalid email or password\"") {
+      print("debut if response.body---------");
+
       var jsonData = json.decode(response.body);
       //print("+++++++jsonData++++++++");
       //print(jsonData);

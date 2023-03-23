@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:test/checkbox_state.dart';
+import 'checkbox_state.dart';
 
 class AjouterProduit extends StatefulWidget {
   const AjouterProduit({Key? key}) : super(key: key);

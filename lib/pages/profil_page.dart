@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:test/modifier_profil.dart';
-
-import 'main.dart';
+import 'package:place_du_marche/main.dart';
+import 'modifier_profil.dart';
 
 class ProfilPage extends StatelessWidget {
   const ProfilPage({
@@ -95,7 +94,7 @@ class ProfilPage extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return const Profil(); //appeler le login page ou le menu principale.
+                        return const MyApp(); //appeler le login page ou le menu principale.
                       },
                     ),
                   );

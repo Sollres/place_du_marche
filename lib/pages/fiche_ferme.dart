@@ -89,7 +89,7 @@ class FicheFermeState extends State<FicheFerme> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) {
-                            return const Profil();
+                            return const ProfilPage(email: 'Petit',nom: 'Guy',prenom: 'Jean');
                           },
                         ),
                       );
@@ -103,7 +103,7 @@ class FicheFermeState extends State<FicheFerme> {
                         MaterialPageRoute(
                           builder: (BuildContext context) {
                             if (_isConnected == true) {
-                              return ChatScreen();
+                              return const ChatScreen(userid: null, recid: null,);
                             } else {
                               return LoginPage();
                             } //Mettre la page de chat ici
@@ -220,7 +220,7 @@ class FicheFermeState extends State<FicheFerme> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return ChatScreen();
+                                return const ChatScreen(userid: null, recid: null,);
                               },
                             ),
                           );
