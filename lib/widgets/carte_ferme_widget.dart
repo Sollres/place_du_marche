@@ -24,7 +24,8 @@ class ProductCard extends StatelessWidget {
               return FicheFerme(
                 title: title,
                 imagePath: imagePath,
-                description: farm.description,
+                producteur: farm.producteur,
+                produits: farm.produits,
               );
             },
           ),
