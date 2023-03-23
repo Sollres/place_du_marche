@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:test/modifier_profil.dart';
-
+import 'package:test/ajouter_produit.dart';
 import 'main.dart';
 
-class ProfilPage extends StatelessWidget {
-  const ProfilPage({
+class PageProfilAgri extends StatelessWidget {
+  const PageProfilAgri({
     super.key,
     required this.nom,
     required this.prenom,
@@ -26,7 +25,8 @@ class ProfilPage extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: const Icon(LineAwesomeIcons.chevron_circle_left)),
-        title: Text("Profile", style: Theme.of(context).textTheme.headline6),
+        title: Text("Profile agriculteur",
+            style: Theme.of(context).textTheme.headline6),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -55,33 +55,28 @@ class ProfilPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return const ModifierProfil();
-                        },
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 24, 145, 76),
-                      side: BorderSide.none,
-                      shape: const StadiumBorder()),
-                  child: const Text("Modifier Profil",
-                      style: TextStyle(color: Colors.white)),
-                ),
-              ),
-              const SizedBox(height: 30),
+
+              const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 10),
 
               // Creation du Menu
               ListProfilWidget(
-                title: "Favoris",
+                title: "Ajouter un produit",
+                icon: LineAwesomeIcons.cog,
+                onPress: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return const AjouterProduit(); //appeler le login page ou le menu principale.
+                      },
+                    ),
+                  );
+                },
+              ),
+
+              ListProfilWidget(
+                title: "Supprimer un produit",
                 icon: LineAwesomeIcons.cog,
                 onPress: () {},
               ),
