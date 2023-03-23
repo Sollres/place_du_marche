@@ -98,7 +98,7 @@ class HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return ChatScreen(userid: widget.id); //Mettre la page de chat ici
+                          return ChatScreen(userid: widget.id,recid: 2); //Mettre la page de chat ici
                         },
                       ),
                     );

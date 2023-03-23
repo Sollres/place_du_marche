@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../pages/LoginPage.dart';
+import '../pages/ChatHome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginPage(),
       //home: ChatScreen(),
+      //home: ContactList(),
     );
   }
 }

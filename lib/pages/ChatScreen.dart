@@ -3,25 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class ChatScreen extends StatefulWidget {
   const ChatScreen({
     Key? key,
     required this.userid,
+    required this.recid,
   }) : super(key: key);
 
   final int? userid;
+  final int? recid;
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
+
 
 class _ChatScreenState extends State<ChatScreen> {
   final _messageController = TextEditingController();
   //final _userController = TextEditingController();
   final _recipientController = TextEditingController();
   final List<Map<String, dynamic>> _messages = [];
+
   Future<void> _getMessages() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:80/chat.php'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:80/chat.php?recipient=${widget.recid}'));
 
     final List<dynamic> responseData = json.decode(response.body);
 
@@ -31,21 +35,31 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  Future<void> _sendMessage(int? id) async {
+  Future<void> _sendMessage(int? id, int? rid) async {
     final int? user = id;
     final message = _messageController.text;
-    final recipient = _recipientController.text;
+    //final recipient = _recipientController.text;
+    //final recipient = rid;
+    final int? recipient = rid;
+
+
     final response = await http.post(
       Uri.parse('http://10.0.2.2:80/chat.php'),
       body: {
         'user' : user.toString(),
         'message': message,
-        'recipient': recipient,
+        'recipient': recipient.toString(),
       },
     );
     print("++++++++++++++++++++++id++++++++++++++++++++++++++");
     print(user);
     print(user.toString());
+
+    print("++++++++++++++++++++++recipient++++++++++++++++++++++++++");
+
+
+    print(recipient);
+    print(recipient.toString());
 
     print("++++++++++++++++++++++reponses++++++++++++++++++++++++++");
     print(response.body);
@@ -76,7 +90,7 @@ class _ChatScreenState extends State<ChatScreen> {
             crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               Text(
-                message['message'],
+                message['message'] ?? '',
                 style: TextStyle(
                   color: isMe ? Colors.white : Colors.black,
                   fontSize: 16,
@@ -88,6 +102,13 @@ class _ChatScreenState extends State<ChatScreen> {
       ],
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _getMessages();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,14 +143,15 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
-                /*Expanded(
+                /*
+                Expanded(
                   child: TextField(
                     controller: _userController,
                     decoration: InputDecoration(
                       hintText: 'Username',
                     ),
                   ),
-                ),*/
+                ),
                 Expanded(
                   child: TextField(
                     controller: _recipientController,
@@ -137,10 +159,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       hintText: 'Recipient',
                     ),
                   ),
-                ),
+                ),*/
                 IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: () => _sendMessage(widget.userid),
+                  onPressed: () => _sendMessage(widget.userid,widget.recid),
                 ),
               ],
             ),
