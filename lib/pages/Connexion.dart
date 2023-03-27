@@ -46,8 +46,8 @@ class _ConnexionState extends State<Connexion> {
       "email": mail.text.toString(),
       "password": pass.text.toString(),
     });
-    print("++++++++++response.body ++++++++++++");
-    print(response.body );
+    //print("++++++++++response.body ++++++++++++");
+    //print(response.body );
 
     if (response.body != "\"Error: Invalid email or password\"") {
       var jsonData = json.decode(response.body);

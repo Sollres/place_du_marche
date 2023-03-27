@@ -14,7 +14,7 @@
     if($count == 1){
         echo json_encode("Error");
     }else{
-        $insert = "INSERT INTO users_pdm(username,email,mdp) VALUES ('".$username."','".$email."','".$password."')";
+        $insert = "INSERT INTO users_pdm(username,email,mdp,role) VALUES ('".$username."','".$email."','".$password."','client')";
             $query = mysqli_query($db,$insert);
             if($query){
                 echo json_encode("Success");

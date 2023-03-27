@@ -83,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
         msg: 'Registration Successful',
         toastLength: Toast.LENGTH_SHORT,
       );*/
-      _showDialog("vous êtes enregistré avec succes");
+      //_showDialog("vous êtes enregistré avec succes");
       //LoginPage();
       Navigator.push(
         context,

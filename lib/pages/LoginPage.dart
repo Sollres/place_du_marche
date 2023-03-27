@@ -4,8 +4,44 @@ import 'SignupPage.dart';
 import 'Connexion.dart';
 import 'package:http/http.dart' as http;
 
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
-class LoginPage extends StatelessWidget {
+  @override
+  LoginPageState createState() => LoginPageState();
+}
+
+class LoginPageState extends State<LoginPage> {
+  void _showAdvantages() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Les avantages'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('1.Possibilité de contacter les agriculteurs'),
+              const Text(
+                  '2. Possibilité d\'ajouter les fermes en favoris pour un accès plus rapide'),
+              const Text(
+                  '3. Recevoir des notifications des agriculteurs en favoris'),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Fermer'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +54,6 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-
               SizedBox(
                 width: 200,
                 child: ElevatedButton(
@@ -26,8 +61,8 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: Colors.lightGreen,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => Connexion()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Connexion()));
                   },
                   child: Text("Connexion"),
                 ),
@@ -40,13 +75,26 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: Colors.lightGreen,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   child: Text("Visiter"),
                 ),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 20),
+              InkWell(
+                onTap: _showAdvantages,
+                child: const Text(
+                  'Découvez les avantages clients',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
@@ -68,3 +116,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
