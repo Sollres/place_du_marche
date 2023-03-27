@@ -128,7 +128,7 @@ class HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SingleChildScrollView(
+          /*SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
               padding:
@@ -179,7 +179,7 @@ class HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          ),
+          ),*/
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
