@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../pages/LoginPage.dart';
-import '../pages/ChatHome.dart';
 
 
 void main() {
@@ -20,8 +19,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: LoginPage(),
-      //home: ChatScreen(),
-      //home: ContactList(),
     );
   }
 }
