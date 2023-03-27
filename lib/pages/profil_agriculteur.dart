@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../main.dart';
+import 'package:place_du_marche/pages/modifier_profil_agri.dart';
 import 'ajouter_produit.dart';
 
 class PageProfilAgri extends StatelessWidget {
@@ -55,6 +56,26 @@ class PageProfilAgri extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const ModifierProfilAgri();
+                        },
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 24, 145, 76),
+                      side: BorderSide.none,
+                      shape: const StadiumBorder()),
+                  child: const Text("Modifier Profil",
+                      style: TextStyle(color: Colors.white)),
+                ),
+              ),
 
               const SizedBox(height: 20),
               const Divider(),
@@ -63,7 +84,7 @@ class PageProfilAgri extends StatelessWidget {
               // Creation du Menu
               ListProfilWidget(
                 title: "Ajouter un produit",
-                icon: LineAwesomeIcons.cog,
+                icon: LineAwesomeIcons.plus_circle,
                 onPress: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -77,7 +98,7 @@ class PageProfilAgri extends StatelessWidget {
 
               ListProfilWidget(
                 title: "Supprimer un produit",
-                icon: LineAwesomeIcons.cog,
+                icon: LineAwesomeIcons.minus_circle,
                 onPress: () {},
               ),
 

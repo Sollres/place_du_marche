@@ -64,7 +64,7 @@ class PageProfilAdmin extends StatelessWidget {
               // Creation du Menu
               ListProfilWidget(
                 title: "Créer un compte ",
-                icon: LineAwesomeIcons.cog,
+                icon: LineAwesomeIcons.user_plus,
                 onPress: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -75,10 +75,11 @@ class PageProfilAdmin extends StatelessWidget {
                   );
                 },
               ),
+              
 
               ListProfilWidget(
                 title: "Supprimer un compte ",
-                icon: LineAwesomeIcons.cog,
+                icon: LineAwesomeIcons.user_minus,
                 onPress: () {},
               ),
 

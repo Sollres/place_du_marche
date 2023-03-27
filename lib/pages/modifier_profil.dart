@@ -13,9 +13,9 @@ class ModifierProfil extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: const Icon(LineAwesomeIcons.chevron_circle_left)),
-            title: Text("Modifier Profil",
+        title: Text("Modifier Profil",
             style: Theme.of(context).textTheme.headline6),
-            centerTitle: true,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -80,15 +80,20 @@ class ModifierProfil extends StatelessWidget {
                     SizedBox(
                       width: 200,
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 24, 145, 76),
-                          side: BorderSide.none,
-                          shape: const StadiumBorder()),
-                          child: const Text("Modifier",
-                          style:  TextStyle(color: Colors.white),),
+                            backgroundColor:
+                                const Color.fromARGB(255, 24, 145, 76),
+                            side: BorderSide.none,
+                            shape: const StadiumBorder()),
+                        child: const Text(
+                          "Modifier",
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
+                    ),
                   ],
                 ),
               ),

@@ -81,7 +81,7 @@ class ProfilPage extends StatelessWidget {
               // Creation du Menu
               ListProfilWidget(
                 title: "Favoris",
-                icon: LineAwesomeIcons.cog,
+                icon: LineAwesomeIcons.heart,
                 onPress: () {},
               ),
 

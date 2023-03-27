@@ -10,8 +10,6 @@ class AjouterProduit extends StatefulWidget {
 }
 
 class _AjouterProduitState extends State<AjouterProduit> {
-  
-
   Widget buildSingleCheckbox(CheckBoxState checkbox) => CheckboxListTile(
         controlAffinity: ListTileControlAffinity.leading,
         activeColor: Colors.green,
@@ -25,7 +23,7 @@ class _AjouterProduitState extends State<AjouterProduit> {
     CheckBoxState(title: 'Crémerie'),
     CheckBoxState(title: 'Poissons'),
     CheckBoxState(title: 'Vins et spiritieux'),
-    CheckBoxState(title: 'Ouefs'),
+    CheckBoxState(title: 'Oeufs'),
   ];
 
   final deuxiemeChoix = [
@@ -49,15 +47,53 @@ class _AjouterProduitState extends State<AjouterProduit> {
             style: Theme.of(context).textTheme.headline6),
         centerTitle: true,
       ),
-      body: Column(
-        
-        children: [
-          ...premierChoix.map(buildSingleCheckbox).toList(),
-          const SizedBox(height: 20),
-
-
-          ...deuxiemeChoix.map(buildSingleCheckbox).toList(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                  label: Text("Saisir le nom du produit"),
+                  prefixIcon: Icon(LineAwesomeIcons.fruit_apple)),
+            ),
+            const SizedBox(height: 30),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Veuillez choisir une catégorie pour le produit : ",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            const SizedBox(height: 10),
+            ...premierChoix.map(buildSingleCheckbox).toList(),
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Text(
+                "Veuillez choisir un label pour le produit : ",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ...deuxiemeChoix.map(buildSingleCheckbox).toList(),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 200,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 24, 145, 76),
+                    side: BorderSide.none,
+                    shape: const StadiumBorder()),
+                child: const Text(
+                  "Ajouter",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
