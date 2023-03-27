@@ -22,7 +22,7 @@ class Etiquette extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return FicheFerme(title: farm.title, imagePath: farm.image, producteur: farm.producteur,produits: farm.produits,);
+                return FicheFerme(title: farm.title, imagePath: farm.image, producteur: farm.producteur,produits: farm.produits, reseau: farm.reseau, email: farm.email,);
               },
             ),
           );

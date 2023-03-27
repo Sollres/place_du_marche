@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:place_du_marche/models/farm.dart';
 import 'package:place_du_marche/pages/LoginPage.dart';
+import 'package:place_du_marche/pages/profil_admin.dart';
+import 'package:place_du_marche/pages/profil_agriculteur.dart';
 //import 'package:place_du_marche/pages/newHome.dart';
 import 'package:place_du_marche/pages/profil_page.dart';
 //import 'package:place_du_marche/widgets/box_ferme_widget.dart';
@@ -86,7 +88,7 @@ class HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const Profil();
+                          return const PageProfilAdmin(email: 'Petit',nom: 'Guy',prenom: 'Jean');
                         },
                       ),
                     );
@@ -130,7 +132,7 @@ class HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SingleChildScrollView(
+          /*SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
               padding:
@@ -181,7 +183,7 @@ class HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          ),
+          ),*/
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

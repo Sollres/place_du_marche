@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconly/iconly.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:place_du_marche/pages/profil_page.dart';
-import 'package:place_du_marche/widgets/box_ferme_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'ChatScreen.dart';
 import 'LoginPage.dart';
@@ -23,18 +25,24 @@ class FicheFerme extends StatefulWidget {
     required this.imagePath,
     required this.producteur,
     required this.produits,
+    required this.reseau,
+    required this.email,
   });
 
   final String title;
   final String imagePath;
   final String producteur;
   final String produits;
+  final String reseau;
+  final String email;
 
   @override
   State<FicheFerme> createState() => FicheFermeState();
 }
 
 class FicheFermeState extends State<FicheFerme> {
+  String facebook = "";
+  String website = "";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -89,7 +97,8 @@ class FicheFermeState extends State<FicheFerme> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) {
-                            return const Profil();
+                            return const ProfilPage(
+                                email: 'Petit', nom: 'Guy', prenom: 'Jean');
                           },
                         ),
                       );
@@ -103,7 +112,10 @@ class FicheFermeState extends State<FicheFerme> {
                         MaterialPageRoute(
                           builder: (BuildContext context) {
                             if (_isConnected == true) {
-                              return ChatScreen();
+                              return const ChatScreen(
+                                userid: null,
+                                recid: null,
+                              );
                             } else {
                               return LoginPage();
                             } //Mettre la page de chat ici
@@ -172,6 +184,7 @@ class FicheFermeState extends State<FicheFerme> {
   }
 
   scroll() {
+    findSocial(widget.reseau);
     return DraggableScrollableSheet(
         initialChildSize: 0.75,
         maxChildSize: 1.0,
@@ -212,7 +225,7 @@ class FicheFermeState extends State<FicheFerme> {
                     children: [
                       Text(
                         widget.title,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const Spacer(),
                       GestureDetector(
@@ -220,7 +233,10 @@ class FicheFermeState extends State<FicheFerme> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return ChatScreen();
+                                return const ChatScreen(
+                                  userid: null,
+                                  recid: null,
+                                );
                               },
                             ),
                           );
@@ -252,13 +268,95 @@ class FicheFermeState extends State<FicheFerme> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    widget.producteur,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2!
-                        .copyWith(color: Colors.black54),
+                  Row(
+                    children: [
+                      Text(
+                        widget.producteur,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: Colors.black54),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (facebook.isNotEmpty) {
+                            launch(facebook);
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: "Pas de page facebook",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                        },
+                        child: const CircleAvatar(
+                          radius: 10,
+                          backgroundColor: Colors.transparent,
+                          child: Icon(
+                            LineAwesomeIcons.facebook,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (website.isNotEmpty) {
+                            launch(website);
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: "Pas de site web",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                        },
+                        child: const CircleAvatar(
+                          radius: 10,
+                          backgroundColor: Colors.transparent,
+                          child: Icon(
+                            LineAwesomeIcons.laptop,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ), //https://www.youtube.com/watch?v=iZh9Tdhi6MA&t=15s (6:40)
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 10,
+                        backgroundColor: Colors.transparent,
+                        child: Icon(
+                          LineAwesomeIcons.mail_bulk,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        widget.email,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: Colors.black54),
+                      ),
+                    ],
+                  ),
+
                   const SizedBox(
                     height: 10,
                   ),
@@ -293,8 +391,24 @@ class FicheFermeState extends State<FicheFerme> {
                     ),
                   ),
                   Text(
+                    "Description",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                      "Aucune description de cette exploitation pour le moment"),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15.0),
+                    child: Divider(
+                      height: 4,
+                      thickness: 2,
+                    ),
+                  ),
+                  Text(
                     "Produits",
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 10,
@@ -310,13 +424,13 @@ class FicheFermeState extends State<FicheFerme> {
                   //Test
                   Text(
                     "Horaires",
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   const Text(
-                      'Lundi : 9:00 - 15:00\nMardi : Fermé\nMercredi : etc...')
+                      'Lundi : 9:00 - 15:00\nMardi : Fermé\nMercredi : etc...'),
                 ],
               ),
             ),
@@ -328,5 +442,20 @@ class FicheFermeState extends State<FicheFerme> {
     setState(() {
       _isVisible = !_isVisible;
     });
+  }
+
+  bool stringContains(String string, substring) {
+    return string.contains(substring);
+  }
+
+  void findSocial(String social) {
+    List socials = social.split(",");
+    for (int i = 0; i < socials.length; i++) {
+      if (stringContains(socials[i], "facebook")) {
+        facebook = socials[i];
+      } else {
+        website = socials[i];
+      }
+    }
   }
 }
