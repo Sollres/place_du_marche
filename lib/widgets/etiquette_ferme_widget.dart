@@ -7,9 +7,11 @@ class Etiquette extends StatelessWidget {
   const Etiquette({
     super.key,
     required this.farm,
+    required this.farms
   });
 
   final Farm farm;
+  final FarmBDD farms;
 
 
   @override
@@ -22,7 +24,7 @@ class Etiquette extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return FicheFerme(title: farm.title, imagePath: farm.image, producteur: farm.producteur,produits: farm.produits, reseau: farm.reseau, email: farm.email,);
+                return FicheFerme(title: farm.title, imagePath: farm.image, producteur: farm.producteur,produits: farm.produits, reseau: farm.reseau, email: farm.email,farms: farms);
               },
             ),
           );

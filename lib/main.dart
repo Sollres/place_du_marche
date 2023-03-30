@@ -20,8 +20,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: LoginPage(),
-      //home: ChatScreen(),
-      //home: ContactList(),
     );
   }
 }

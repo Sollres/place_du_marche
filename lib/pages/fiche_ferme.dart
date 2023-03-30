@@ -27,6 +27,7 @@ class FicheFerme extends StatefulWidget {
     required this.produits,
     required this.reseau,
     required this.email,
+    required this.farms
   });
 
   final String title;
@@ -35,6 +36,7 @@ class FicheFerme extends StatefulWidget {
   final String produits;
   final String reseau;
   final String email;
+  final FarmBDD farms;
 
   @override
   State<FicheFerme> createState() => FicheFermeState();
