@@ -46,12 +46,12 @@ class FarmBDD {
 Future<List<FarmBDD>> downloadJSON() async {
   final jsonEndpoint = "http://localhost:8888/test.php";
 
-  final response = await get(jsonEndpoint);
+  final response = await get(jsonEndpoint as Uri);
 
   if (response.statusCode == 200) {
     List farms = json.decode(response.body);
     return farms
-        .map((farms) => new Spacecraft.fromJson(farms))
+        .map((farms) => new FarmBDD.fromJson(farms))
         .toList();
   } else{
     throw Exception('We were not able to successfully download the json data.');
