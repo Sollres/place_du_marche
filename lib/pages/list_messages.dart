@@ -64,7 +64,7 @@ class ItemList extends StatelessWidget {
       itemBuilder: (context, i) {
         return ListTile(
           title: Text(list[i]['Nom']),
-          //subtitle: Text(list[i]['id']),
+          //subtitle: Text(list[i]['iduser']),
           leading: Icon(Icons.message),
           onTap: () {
             Navigator.push(
@@ -72,7 +72,7 @@ class ItemList extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => ChatScreen(
                   userid: messagesList.widget.userId,
-                  recid: int.parse(list[i]['id']),
+                  recid: int.parse(list[i]['iduser']),
                 ),
               ),
             );

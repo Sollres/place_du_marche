@@ -38,9 +38,14 @@
   // Récupérer les messages de la table "messages" pour un destinataire donné
   if (isset($_GET["recipient"])) {
       $recipient = intval($_GET["recipient"]);
+      $userid = intval($_GET["user"]);
       try {
-          $stmt = $pdo->prepare("SELECT * FROM messages WHERE recipient = :recipient");
+          //$stmt = $pdo->prepare("SELECT * FROM messages WHERE recipient = :recipient and user = :user and recipient = :user and user = :recipient");
+          $stmt = $pdo->prepare("SELECT * FROM messages WHERE (user = :user AND recipient = :recipient) OR (user = :recipient AND recipient = :user)");
+
           $stmt->bindParam(":recipient", $recipient);
+          $stmt->bindParam(":user", $userid);
+
           $stmt->execute();
           $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
       } catch (PDOException $e) {

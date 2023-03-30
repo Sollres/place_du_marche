@@ -20,7 +20,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController user = new TextEditingController();
   TextEditingController pass = new TextEditingController();
   TextEditingController mail = new TextEditingController();
- // TextEditingController passwordc = new TextEditingController();
+  TextEditingController passwordc = new TextEditingController();
 
   // Création de la fonction pour afficher le popup
   void _showDialog(msg) {
@@ -45,55 +45,44 @@ class _SignupPageState extends State<SignupPage> {
 
   Future register() async {
     //print("first print");
-    var url = Uri.parse('http://10.0.2.2:8888/register.php');
-    //print("print url ");
-    //print(url);
+
+    // Validation des champs
+    if (user.text.isEmpty || pass.text.isEmpty || mail.text.isEmpty || passwordc.text.isEmpty) {
+      _showDialog("Tous les champs sont obligatoires");
+      return;
+    }
+
+    RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailRegex.hasMatch(mail.text)) {
+      _showDialog("L'adresse mail n'est pas valide");
+      return;
+    }
+
+    if (pass.text != passwordc.text) {
+      _showDialog("Les mots de passe ne correspondent pas");
+      return;
+    }
+
+
+    var url = Uri.parse('http://10.0.2.2:80/register.php');
 
     var response = await http.post(url, body: {
       "username": user.text.toString(),
       "password": pass.text.toString(),
       "email": mail.text.toString()
     });
-    //print("début response ++++++++++++++++++++");
-    //print(response.body);
-    //print("fin response ++++++++++++++++++++");
-
-    //print("avant data :::::::::::::::::");
-
-    //var data = json.decode(response.body);
-    //print("data :::::::::::::::::");
-    //print(data);
-    //print("fin data :::::::::::::::::");
 
     if (response.body == "first\"Error\"") {
-      /*print("je suis dans le if");
-      Fluttertoast.showToast(
-        backgroundColor: Colors.orange,
-        textColor: Colors.white,
-        msg: 'User already exit!',
-        toastLength: Toast.LENGTH_SHORT,
-      );*/
+
       _showDialog("Ce mail est déjà utilisé");
     } else {
       print("je suis dans le else");
 
-     /* Fluttertoast.showToast(
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        msg: 'Registration Successful',
-        toastLength: Toast.LENGTH_SHORT,
-      );*/
-      //_showDialog("vous êtes enregistré avec succes");
-      //LoginPage();
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
-      /*Navigator.push(context,
-        MaterialPageRoute(
-          builder: (context) => LoginPage(),
-        ),
-      );*/
+
     }
   }
 
@@ -132,8 +121,8 @@ class _SignupPageState extends State<SignupPage> {
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                              hintText: 'Entrez votre nom',
-                              hintStyle: TextStyle(color: Colors.white),
+                            hintText: 'Entrez votre nom',
+                            hintStyle: TextStyle(color: Colors.white),
                           ),
                         ),
                         SizedBox(height: 20),
@@ -158,7 +147,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         SizedBox(height: 20),
                         TextField(
-                          //controller: passwordc,
+                          controller: passwordc,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(

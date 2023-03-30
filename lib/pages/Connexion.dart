@@ -40,45 +40,31 @@ class _ConnexionState extends State<Connexion> {
     }
 
   Future login() async {
+    // Validation des champs
+    if (pass.text.isEmpty || mail.text.isEmpty) {
+      _showDialog("Tous les champs sont obligatoires");
+      return;
+    }
+
     var url = Uri.parse('http://10.0.2.2:80/login.php');
+
 
     var response = await http.post(url, body: {
       "email": mail.text.toString(),
       "password": pass.text.toString(),
     });
-    //print("++++++++++response.body ++++++++++++");
-    //print(response.body );
-
     if (response.body != "\"Error: Invalid email or password\"") {
       var jsonData = json.decode(response.body);
-      //print("+++++++jsonData++++++++");
-      //print(jsonData);
-      //print("++++++++++FinJD+++++++++++");
-      //print("+++++++++++++++jsonData['status']+++++++++++++++++");
-      //print(jsonData['id'].runtimeType);
-
       if (jsonData != null) {
-        // Connexion réussie, récupérez l'id de l'utilisateur
 
-        int? userId = int.tryParse(jsonData['id']);
-        //print("++++++++++++++ userId++++++++++++++");
-        //print('Utilisateur connecté avec l\'id $userId');
-        /*Fluttertoast.showToast(
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          msg: 'Vous êtes connecté avec l\'id $userId',
-          toastLength: Toast.LENGTH_SHORT,
-        );*/
+        int? userId = int.tryParse(jsonData['iduser']);
+
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage(id: userId)),
         );
       }
     } else {
-      // Erreur de requête
-
-      // Connexion échouée
-      print("je suis dans le else +++ erreur mdp ou mal +++");
       _showDialog("Il y a une erreur dans le mail ou le mot de passe");
       print('Erreur de requête : ${response.statusCode}');
     }
