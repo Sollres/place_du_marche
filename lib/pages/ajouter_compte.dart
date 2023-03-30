@@ -12,7 +12,7 @@ class AjouterCompte extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(LineAwesomeIcons.chevron_circle_left)),
+            icon: const Icon(LineAwesomeIcons.chevron_circle_left), color: Colors.black),
         title: Text("Ajouter un compte",
             style: Theme.of(context).textTheme.headline6),
         centerTitle: true,
@@ -39,7 +39,7 @@ class AjouterCompte extends StatelessWidget {
                   children: [
                     TextFormField(
                       decoration: const InputDecoration(
-                          label: Text("Sasire un identifiant : "),
+                          label: Text("Saisire un identifiant : "),
                           prefixIcon: Icon(LineAwesomeIcons.user)),
                     ),
                     const SizedBox(height: 20),
@@ -66,12 +66,12 @@ class AjouterCompte extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(255, 24, 145, 76),
+                                const Color.fromARGB(255, 31, 190, 100),
                             side: BorderSide.none,
                             shape: const StadiumBorder()),
                         child: const Text(
                           "Ajouter",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),

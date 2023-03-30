@@ -25,7 +25,7 @@ class PageProfilAdmin extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(LineAwesomeIcons.chevron_circle_left)),
+            icon: const Icon(LineAwesomeIcons.chevron_circle_left), color: Colors.black,),
         title: Text("Profile administrateur",
             style: Theme.of(context).textTheme.headline6),
         centerTitle: true,

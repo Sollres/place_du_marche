@@ -61,12 +61,6 @@ class ModifierProfil extends StatelessWidget {
                     const SizedBox(height: 10),
                     TextFormField(
                       decoration: const InputDecoration(
-                          label: Text("Prenom"),
-                          prefixIcon: Icon(LineAwesomeIcons.user)),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      decoration: const InputDecoration(
                           label: Text("E-Mail"),
                           prefixIcon: Icon(LineAwesomeIcons.envelope_1)),
                     ),
@@ -85,12 +79,12 @@ class ModifierProfil extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(255, 24, 145, 76),
+                                const Color.fromARGB(255, 31, 190, 100),
                             side: BorderSide.none,
                             shape: const StadiumBorder()),
                         child: const Text(
                           "Modifier",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),

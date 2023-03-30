@@ -24,7 +24,7 @@ class ProfilPage extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(LineAwesomeIcons.chevron_circle_left)),
+            icon: const Icon(LineAwesomeIcons.chevron_circle_left), color: Colors.black),
         title: Text("Profile", style: Theme.of(context).textTheme.headline6),
         centerTitle: true,
       ),
@@ -71,7 +71,7 @@ class ProfilPage extends StatelessWidget {
                       side: BorderSide.none,
                       shape: const StadiumBorder()),
                   child: const Text("Modifier Profil",
-                      style: TextStyle(color: Colors.white)),
+                      style: TextStyle(color: Colors.black)),
                 ),
               ),
               const SizedBox(height: 30),

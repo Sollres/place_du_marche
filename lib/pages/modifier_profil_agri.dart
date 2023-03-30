@@ -12,7 +12,7 @@ class ModifierProfilAgri extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(LineAwesomeIcons.chevron_circle_left)),
+            icon: const Icon(LineAwesomeIcons.chevron_circle_left), color: Colors.black,),
         title: Text("Modifier Profil",
             style: Theme.of(context).textTheme.headline6),
         centerTitle: true,
@@ -39,7 +39,7 @@ class ModifierProfilAgri extends StatelessWidget {
                       height: 35,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: Colors.green),
+                          color: const Color.fromARGB(255, 31, 190, 100)),
                       child: const Icon(
                         LineAwesomeIcons.camera,
                         color: Colors.black,
@@ -62,7 +62,7 @@ class ModifierProfilAgri extends StatelessWidget {
                     const SizedBox(height: 10),
                     TextFormField(
                       decoration: const InputDecoration(
-                          label: Text("E-Mail"),
+                          label: Text("E-Mail "),
                           prefixIcon: Icon(LineAwesomeIcons.envelope_1)),
                     ),
                     const SizedBox(height: 10),
@@ -85,7 +85,7 @@ class ModifierProfilAgri extends StatelessWidget {
                             shape: const StadiumBorder()),
                         child: const Text(
                           "Modifier",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),

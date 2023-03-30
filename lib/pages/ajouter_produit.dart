@@ -101,7 +101,7 @@ class _AjouterProduitState extends State<AjouterProduit> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(LineAwesomeIcons.chevron_circle_left)),
+            icon: const Icon(LineAwesomeIcons.chevron_circle_left), color: Colors.black),
         title: Text("Ajouter un produit",
             style: Theme.of(context).textTheme.headline6),
         centerTitle: true,
@@ -259,12 +259,12 @@ class _AjouterProduitState extends State<AjouterProduit> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 24, 145, 76),
+                    backgroundColor: const Color.fromARGB(255, 31, 190, 100),
                     side: BorderSide.none,
                     shape: const StadiumBorder()),
                 child: const Text(
                   "Ajouter",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),

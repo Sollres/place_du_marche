@@ -88,7 +88,7 @@ class HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const ProfilPage(email: 'collinssoares@gmail.com',nom: 'Soares',prenom: 'Collins');
+                          return const PageProfilAgri(email: 'collinssoares@gmail.com',nom: 'Soares',prenom: 'Collins');
                         },
                       ),
                     );
