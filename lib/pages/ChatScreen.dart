@@ -25,9 +25,12 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<Map<String, dynamic>> _messages = [];
 
   Future<void> _getMessages() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:80/chat.php?recipient=${widget.recid}'));
+    final url = Uri.parse('http://10.0.2.2:80/chat.php?recipient=${widget.recid}&user=${widget.userid}');
+    final response = await http.get(url);
 
     final List<dynamic> responseData = json.decode(response.body);
+    print("reeeeeeeeeeeepDATAAAAAAAAAAA");
+    print(responseData);
 
     setState(() {
       _messages.clear();

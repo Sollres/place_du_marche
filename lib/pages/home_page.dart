@@ -12,7 +12,8 @@ import 'package:place_du_marche/pages/profil_page.dart';
 import 'package:place_du_marche/widgets/etiquette_ferme_widget.dart';
 import 'package:place_du_marche/widgets/filtres_widget.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
+//import 'ChatHome.dart';
+import 'list_messages.dart';
 import 'ChatScreen.dart';
 
 const backgroundColor = Color.fromRGBO(125, 206, 160, 1);
@@ -87,7 +88,7 @@ class HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const PageProfilAdmin(email: 'Petit',nom: 'Guy',prenom: 'Jean');
+                          return const ProfilPage(email: 'collinssoares@gmail.com',nom: 'Soares',prenom: 'Collins');
                         },
                       ),
                     );
@@ -100,7 +101,8 @@ class HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return ChatScreen(userid: widget.id,recid: 2); //Mettre la page de chat ici
+                          //return ChatScreen(userid: widget.id,recid: 2); //Mettre la page de chat ici
+                          return MessagesList(userId: widget.id);
                         },
                       ),
                     );
